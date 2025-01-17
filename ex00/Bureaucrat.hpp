@@ -21,12 +21,27 @@ class Bureaucrat
 		int					grade;
 
 	public:
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
+
 		void		incrementGrade();
 		void		decrementGrade();
 		int			getGrade() const;
-		std::string	getName() const;
+		const std::string	getName() const;
 		Bureaucrat&	operator=( const Bureaucrat& before);
 		Bureaucrat( const Bureaucrat& before );
+		Bureaucrat( std::string name, int grade );
 		Bureaucrat( void );
 		~Bureaucrat();
 };
+
+std::ostream&	operator<<( std::ostream &out, Bureaucrat const &classToPrint );
