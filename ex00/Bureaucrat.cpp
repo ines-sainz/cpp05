@@ -58,7 +58,7 @@ Bureaucrat& Bureaucrat::operator=( const Bureaucrat& before )
 	return (*this);
 }
 
-Bureaucrat::Bureaucrat( const Bureaucrat& before )
+Bureaucrat::Bureaucrat( const Bureaucrat& before ) : name(before.name)
 {
 	std::cout << "Copy Constructor called" << std::endl;
 	*this = before;
