@@ -22,6 +22,17 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 	return ("Grade is too high");
 }
 
+void Bureaucrat::signForm( Form form )
+{
+	if (form.getGradeToSign() < this->grade)
+	{
+		std::cout << "Bureaucrat " << this->name << " couldn't sign form " << form.getName() << " because is not in their level" << std::endl;
+		return ;
+	}
+	form.beSigned(*this);
+	std::cout << "Bureaucrat " << this->name << " signed form " << form.getName();
+}
+
 void	Bureaucrat::incrementGrade()
 {
 	if (this->grade == 1)
