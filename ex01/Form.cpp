@@ -11,6 +11,17 @@
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
+
+const char* Form::GradeTooLowException::what() const throw()
+{
+	return ("Grade is too low");
+}
+
+const char* Form::GradeTooHighException::what() const throw()
+{
+	return ("Grade is too high");
+}
 
 void Form::beSigned( Bureaucrat bureaucrat )
 {
@@ -38,15 +49,18 @@ const int Form::getGradeToExecute() const
 
 Form& Form::operator=( const Form& before )
 {
-	(std::string)this->name = before.getName();
+	std::cout << "Copy Form Assigment operator called" << std::endl;
+	const_cast<std::string&>(this->name) = before.name;
 	const_cast<int&>(this->gradeToExecute) = before.getGradeToExecute();
 	const_cast<int&>(this->gradeToSign) = before.getGradeToSign();
 	this->isSigned = before.isSigned;
 	return (*this);
 }
 
-Form::Form( const Form& before ) : name(before.name), gradeToSign(before.gradeToSign), gradeToExecute(gradeToExecute)
+Form::Form( const Form& before ) : name(before.name), gradeToSign(before.gradeToSign), gradeToExecute(before.gradeToExecute)
 {
+	this->isSigned = before.isSigned;
+	std::cout << "Copy Bureaucrat Constructor called" << std::endl;
 	if (gradeToExecute < 1 || gradeToSign < 1)
 		throw (Form::GradeTooHighException());
 	if (gradeToExecute > 150 || gradeToSign > 150)
@@ -56,7 +70,11 @@ Form::Form( const Form& before ) : name(before.name), gradeToSign(before.gradeTo
 
 Form::Form( std::string name, int gradeToSign, int gradeToExecute ) : name(name), gradeToSign(gradeToSign), gradeToExecute(gradeToExecute)
 {
-	std::cout << "Form Constructor called" << std::endl;
+	std::cout << "Form " << name << " Constructor called" << std::endl;
+	if (gradeToExecute < 1 || gradeToSign < 1)
+		throw (Form::GradeTooHighException());
+	if (gradeToExecute > 150 || gradeToSign > 150)
+		throw (Form::GradeTooLowException());
 }
 
 Form::Form() : name(""), gradeToExecute(150), gradeToSign(150)
@@ -67,10 +85,11 @@ Form::Form() : name(""), gradeToExecute(150), gradeToSign(150)
 
 Form::~Form()
 {
-	std::cout << "Default Form Constructor called" << std::endl;
+	std::cout << "Default Form Destructor called" << std::endl;
 }
 
 std::ostream&	operator<<( std::ostream &out, Form const &classToPrint )
 {
 	out << classToPrint.getName() << ", Form grade to sign: " << classToPrint.getGradeToSign() << " grade to execute: " << classToPrint.getGradeToExecute() << std::endl;
+	return (out);
 }

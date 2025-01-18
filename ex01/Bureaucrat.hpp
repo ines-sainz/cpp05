@@ -15,6 +15,8 @@
 #include <iostream>
 #include "Form.hpp"
 
+class Form;
+
 class Bureaucrat
 {
 	private:
@@ -34,7 +36,7 @@ class Bureaucrat
 				const char* what() const throw();
 		};
 
-		void 				signForm( Form form );
+		void 				signForm( Form& form ) const;
 		void				incrementGrade();
 		void				decrementGrade();
 		int					getGrade() const;

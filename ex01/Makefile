@@ -14,11 +14,14 @@ NAME = bureaucrats
 
 CC = c++
 
-CFLAGS = -Wall -Werror -Wextra #-std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp Bureaucrat.cpp
+SRCS = main.cpp Bureaucrat.cpp Form.cpp
 
 OBJS = $(SRCS:.cpp=.o)
+
+%o: %.cpp
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 all: $(NAME)
 

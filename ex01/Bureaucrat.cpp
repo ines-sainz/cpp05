@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
@@ -22,7 +23,7 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 	return ("Grade is too high");
 }
 
-void Bureaucrat::signForm( Form form )
+void Bureaucrat::signForm( Form& form ) const
 {
 	if (form.getGradeToSign() < this->grade)
 	{
@@ -30,7 +31,7 @@ void Bureaucrat::signForm( Form form )
 		return ;
 	}
 	form.beSigned(*this);
-	std::cout << "Bureaucrat " << this->name << " signed form " << form.getName();
+	std::cout << "Bureaucrat " << this->name << " signed form " << form.getName() << std::endl;
 }
 
 void	Bureaucrat::incrementGrade()
@@ -63,7 +64,7 @@ const std::string Bureaucrat::getName() const
 }
 Bureaucrat& Bureaucrat::operator=( const Bureaucrat& before )
 {
-	std::cout << "Copy Assigment operator called" << std::endl;
+	std::cout << "Copy Bureaucrat Assigment operator called" << std::endl;
 	(std::string)this->name = before.getName();
 	this->grade = before.getGrade();
 	return (*this);
@@ -71,7 +72,7 @@ Bureaucrat& Bureaucrat::operator=( const Bureaucrat& before )
 
 Bureaucrat::Bureaucrat( const Bureaucrat& before ) : name(before.name)
 {
-	std::cout << "Copy Constructor called" << std::endl;
+	std::cout << "Copy Bureaucrat Constructor called" << std::endl;
 	*this = before;
 }
 
