@@ -40,6 +40,7 @@ class Form
 		
 		void				beSigned( Bureaucrat bureaucrat );
 		const std::string	getName() const;
+		bool				getIsSigned() const;
 		const int			getGradeToSign() const;
 		const int			getGradeToExecute() const;
 

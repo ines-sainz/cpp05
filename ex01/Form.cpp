@@ -27,14 +27,17 @@ void Form::beSigned( Bureaucrat bureaucrat )
 {
 	if ( this->gradeToSign < bureaucrat.getGrade())
 		throw (Form::GradeTooLowException());
-	if (this->isSigned == 1)
-		std::cout << "Already signed Form" << std::endl;
 	this->isSigned = 1;
 }
 
 const std::string	Form::getName() const
 {
 	return (this->name);
+}
+
+bool Form::getIsSigned() const
+{
+	return (this->isSigned);
 }
 
 const int Form::getGradeToSign() const

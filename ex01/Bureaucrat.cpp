@@ -30,6 +30,11 @@ void Bureaucrat::signForm( Form& form ) const
 		std::cout << "Bureaucrat " << this->name << " couldn't sign form " << form.getName() << " because is not in their level" << std::endl;
 		return ;
 	}
+	if (form.getIsSigned() == 1)
+	{
+		std::cout << "Bureaucrat " << this->name << " couldn't sign form " << form.getName() << " because it is already signed" << std::endl;
+		return ;
+	}
 	form.beSigned(*this);
 	std::cout << "Bureaucrat " << this->name << " signed form " << form.getName() << std::endl;
 }
