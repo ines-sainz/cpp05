@@ -6,12 +6,12 @@
 /*   By: isainz-r <isainz-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 12:31:12 by isainz-r          #+#    #+#             */
-/*   Updated: 2025/01/15 12:31:14 by isainz-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:40:26 by isainz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
@@ -23,7 +23,7 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 	return ("Grade is too high");
 }
 
-void Bureaucrat::signForm( Form& form ) const
+void Bureaucrat::signForm( AForm& form ) const
 {
 	if (form.getGradeToSign() < this->grade)
 	{

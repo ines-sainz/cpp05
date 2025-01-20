@@ -53,7 +53,7 @@ const std::string Bureaucrat::getName() const
 Bureaucrat& Bureaucrat::operator=( const Bureaucrat& before )
 {
 	std::cout << "Copy Assigment operator called" << std::endl;
-	(std::string)this->name = before.getName();
+	const_cast<std::string&>(this->name) = before.getName();
 	this->grade = before.getGrade();
 	return (*this);
 }
