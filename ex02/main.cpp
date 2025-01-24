@@ -25,6 +25,7 @@ int main()
 
 		b2.signForm(f2);
 		b2.signForm(f2);
+		b2;
 
 	}
 	catch(const std::exception& e)
