@@ -15,36 +15,36 @@
 
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-	if (this->getIsSigned() == 0)
-	{
-		std::cout << "Form is not signed" << std::endl;
-		return ;
-	}
-	if (this->gradeToExecute < executor.getGrade())
+	if (getGradeToExecute() < executor.getGrade())
 	{
 		throw(AForm::GradeTooLowException());
 	}
-	std::cout << "Bureaucrat " << executor.getName() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
+	std::cout << "Target " << target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 
 PresidentialPardonForm& PresidentialPardonForm::operator=( const PresidentialPardonForm& before)
 {
 	std::cout << "Copy PresidentialPardonForm Assigment operator called" << std::endl;
-	this->gradeToSign = before.gradeToSign;
-	this->gradeToExecute = before.gradeToExecute;
+	this->target = before.target;
 	return (*this);
 }
 
-PresidentialPardonForm::PresidentialPardonForm( const PresidentialPardonForm& before )
+PresidentialPardonForm::PresidentialPardonForm( const PresidentialPardonForm& before ) : AForm(before.getName(), before.getGradeToSign(), before.getGradeToExecute()), target(before.target)
 {
 	std::cout << "Copy PresidentialPardonForm Constructor called" << std::endl;
 	*this = before;
 }
 
-PresidentialPardonForm::PresidentialPardonForm( void ) : AForm("PresidentialPardonForm", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm( std::string target ) : AForm("PresidentialPardonForm", 72, 45)
 {
-	this->gradeToSign = 25;
-	this->gradeToExecute = 5;
+	this->target = target;
+	std::cout << "PresidentialPardonForm Constructor called" << std::endl;
+
+}
+
+PresidentialPardonForm::PresidentialPardonForm( void ) : AForm("PresidentialPardonForm", 25, 5), target("target")
+{
+	this->target = "target";
 	std::cout << "Default PresidentialPardonForm Constructor called" << std::endl;
 }
 

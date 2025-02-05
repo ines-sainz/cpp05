@@ -36,6 +36,7 @@ class Bureaucrat
 				const char* what() const throw();
 		};
 
+		void 				execute( AForm& form ) const;
 		void 				signForm( AForm& form ) const;
 		void				incrementGrade();
 		void				decrementGrade();

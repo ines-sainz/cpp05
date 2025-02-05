@@ -18,13 +18,13 @@
 class RobotomyRequestForm : public AForm
 {
 	private:
-		int	gradeToSign;
-		int	gradeToExecute;
+		std::string	target;
 
 	public:
 		virtual void execute(Bureaucrat const & executor) const;
 		RobotomyRequestForm& operator=( const RobotomyRequestForm& before );
 		RobotomyRequestForm( const RobotomyRequestForm& before );
+		RobotomyRequestForm( std::string target );
 		RobotomyRequestForm( void );
 		~RobotomyRequestForm();
 };

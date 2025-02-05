@@ -18,13 +18,13 @@
 class PresidentialPardonForm : public AForm
 {
 	private:
-		int	gradeToSign;
-		int	gradeToExecute;
+		std::string	target;
 
 	public:
 		virtual void execute(Bureaucrat const & executor) const;
 		PresidentialPardonForm& operator=( const PresidentialPardonForm& before);
 		PresidentialPardonForm( const PresidentialPardonForm& before );
+		PresidentialPardonForm( std::string target );
 		PresidentialPardonForm( void );
 		~PresidentialPardonForm();
 };

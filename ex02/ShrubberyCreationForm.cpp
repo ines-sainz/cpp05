@@ -18,51 +18,34 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 	std::ofstream	toWrite;
 	std::string		fileName;
 
-	if (this->getIsSigned() == 0)
-	{
-		std::cout << "Form is not signed" << std::endl;
-		return ;
-	}
-	if (this->gradeToExecute < executor.getGrade())
+	if (getGradeToExecute() < executor.getGrade())
 		throw(AForm::GradeTooLowException());
-	fileName = executor.getName() + (std::string)"_shrubbery";
+	fileName = this->target + (std::string)"_shrubbery";
 	toWrite.open(fileName, std::ios::out);
 	if (!toWrite)
 	{
 		std::cout << "Can't execute ShrubberyCreationForm" << std::endl;
 	}
-	toWrite << " \
-                             + \
-                            +++ \
-                           +++++ \
-                          +++++++ \
-                          +++++++ \
-                         +++++++++ \
-                        +++++++++++ \
-                       +++++++++++++ \
-                      +++++++++++++++ \
-                     +++++++++++++++++ \
-                        +++++++++++ \
-                      +++++++++++++++ \
-                    +++++++++++++++++++ \
-                  +++++++++++++++++++++++ \
-                +++++++++++++++++++++++++++ \
-                       +++++++++++++ \
-                     +++++++++++++++++ \
-                   +++++++++++++++++++++ \
-                 +++++++++++++++++++++++++ \
-               +++++++++++++++++++++++++++++ \
-             +++++++++++++++++++++++++++++++++ \
-           +++++++++++++++++++++++++++++++++++++ \
-                    +++++++++++++++++++ \
-                  +++++++++++++++++++++++ \
-                +++++++++++++++++++++++++++ \
-              +++++++++++++++++++++++++++++++ \
-            +++++++++++++++++++++++++++++++++++ \
-          ++++++++++++++++mmmmmmm++++++++++++++++ \
-                          mmmmmmm \
-                          mmmmmmm \
-                          mmmmmmm \
+	toWrite << " \n\
+                             +\n\
+                            +++\n\
+                          +++++++\n\
+                        +++++++++++\n\
+                      +++++++++++++++\n\
+                         +++++++++\n\
+                       +++++++++++++\n\
+                     +++++++++++++++++\n\
+                   +++++++++++++++++++++\n\
+                 +++++++++++++++++++++++++\n\
+                    +++++++++++++++++++\n\
+                  +++++++++++++++++++++++\n\
+                +++++++++++++++++++++++++++\n\
+              +++++++++++++++++++++++++++++++\n\
+            +++++++++++++++++++++++++++++++++++\n\
+          ++++++++++++++++mmmmmmm++++++++++++++++\n\
+                          mmmmmmm\n\
+                          mmmmmmm\n\
+                          mmmmmmm\n\
                           mmmmmmm" << std::endl;
 	toWrite.close();
 }
@@ -70,8 +53,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 ShrubberyCreationForm& ShrubberyCreationForm::operator=( const ShrubberyCreationForm& before)
 {
 	std::cout << "Copy ShrubberyCreationForm Assigment operator called" << std::endl;
-	this->gradeToSign = before.gradeToSign;
-	this->gradeToExecute = before.gradeToExecute;
+	this->target = before.target;
 	return (*this);
 }
 
@@ -81,11 +63,16 @@ ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm& befor
 	*this = before;
 }
 
+ShrubberyCreationForm::ShrubberyCreationForm( std::string target ) : AForm("ShrubberyCreationForm", 145, 137)
+{
+	this->target = target;
+	std::cout << "Default ShrubberyCreationForm Constructor called" << std::endl;
+}
+
 ShrubberyCreationForm::ShrubberyCreationForm( void ) : AForm("ShrubberyCreationForm", 145, 137)
 {
-	this->gradeToSign = 145;
-	this->gradeToExecute = 137;
-	std::cout << "Default ShrubberyCreationForm Constructor called" << std::endl;
+	this->target = "target";
+	std::cout << "ShrubberyCreationForm Constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()

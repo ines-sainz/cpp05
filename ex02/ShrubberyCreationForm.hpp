@@ -19,13 +19,13 @@
 class ShrubberyCreationForm : public AForm
 {
 	private:
-		int	gradeToSign;
-		int	gradeToExecute;
+		std::string	target;
 
 	public:
 		virtual void execute(Bureaucrat const & executor) const;
 		ShrubberyCreationForm& operator=( const ShrubberyCreationForm& before);
 		ShrubberyCreationForm( const ShrubberyCreationForm& before );
+		ShrubberyCreationForm( std::string target );
 		ShrubberyCreationForm( void );
 		~ShrubberyCreationForm();
 };

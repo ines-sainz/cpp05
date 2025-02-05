@@ -74,6 +74,7 @@ Form::Form( const Form& before ) : name(before.name), gradeToSign(before.gradeTo
 Form::Form( std::string name, int gradeToSign, int gradeToExecute ) : name(name), gradeToSign(gradeToSign), gradeToExecute(gradeToExecute)
 {
 	std::cout << "Form " << name << " Constructor called" << std::endl;
+	this->isSigned = 0;
 	if (gradeToExecute < 1 || gradeToSign < 1)
 		throw (Form::GradeTooHighException());
 	if (gradeToExecute > 150 || gradeToSign > 150)

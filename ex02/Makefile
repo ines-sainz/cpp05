@@ -21,7 +21,7 @@ SRCS = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyReque
 OBJS = $(SRCS:.cpp=.o)
 
 %o: %.cpp
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $< -o $@
 
 all: $(NAME)
 

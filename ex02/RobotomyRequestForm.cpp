@@ -12,40 +12,43 @@
 
 #include "RobotomyRequestForm.hpp"
 #include "Bureaucrat.hpp"
+#include <ctime>
 
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	if (this->getIsSigned() == 0)
-	{
-		std::cout << "Form is not signed" << std::endl;
-		return ;
-	}
-	if (this->gradeToExecute < executor.getGrade())
-	{
+	if (getGradeToExecute() < executor.getGrade())
 		throw(AForm::GradeTooLowException());
-	}
 	std::cout << "*Making drilling noises*\n";
-
+	std::srand(static_cast<unsigned int>(std::time(0)));
+	int random = rand();
+	if (random % 2 == 0)
+		std::cout << "Target " << target << " has been robotomized" << std::endl;
+	else
+		std::cout << "Target " << target << "robotomy has failed" << std::endl;
 }
 
 RobotomyRequestForm& RobotomyRequestForm::operator=( const RobotomyRequestForm& before )
 {
 	std::cout << "Copy RobotomyRequestForm Assigment Operator called" << std::endl;
-	this->gradeToExecute = before.gradeToExecute;
-	this->gradeToSign = before.gradeToSign;
+	this->target = before.target;
 	return (*this);
 }
 
-RobotomyRequestForm::RobotomyRequestForm( const RobotomyRequestForm& before )
+RobotomyRequestForm::RobotomyRequestForm( const RobotomyRequestForm& before ) : AForm(before.getName(), before.getGradeToSign(), before.getGradeToExecute()), target(before.target)
 {
 	std::cout << "Copy RobotomyRequestForm Constructor called" << std::endl;
 	*this = before;
 }
 
-RobotomyRequestForm::RobotomyRequestForm( void ) : AForm("RobotomyRequestForm", 145, 137)
+RobotomyRequestForm::RobotomyRequestForm( std::string target ) : AForm("RobotomyRequestForm", 72, 45)
 {
-	this->gradeToSign = 72;
-	this->gradeToExecute = 45;
+	this->target = target;
+	std::cout << "RobotomyRequestForm Constructor called" << std::endl;
+}
+
+RobotomyRequestForm::RobotomyRequestForm( void ) : AForm("RobotomyRequestForm", 72, 45), target("target")
+{
+	this->target = "target";
 	std::cout << "Default RobotomyRequestForm Constructor called" << std::endl;
 }
 
